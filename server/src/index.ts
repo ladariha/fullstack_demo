@@ -4,8 +4,10 @@ import cors from "cors";
 import fileUpload from "express-fileupload";
 import session from "express-session";
 import router from "./login/router";
+import longPolling from "./longpolling/router";
 import passportRouter from "./login/googlePassport";
 import passport from "passport";
+import { createWsServer } from "./ws/index";
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
@@ -44,6 +46,7 @@ if (USE_PASSPORT) {
 } else {
   app.use("/auth", router);
 }
+app.use("/longpolling", longPolling);
 // curl -F 'file=@/home/vlriha/Downloads/image1.png' http://localhost:4000/upload -vvv
 app.post("/upload", async (req, res) => {
   if (!req.files?.file) {
@@ -71,9 +74,15 @@ app.get("/", (_req: Request, res: Response) => {
     .setHeader("x-custom-2", 123)
     .send("ok");
 });
+const wsServer = createWsServer();
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
+});
+server.on("upgrade", (request, socket, head) => {
+  wsServer.handleUpgrade(request, socket, head, (socket) => {
+    wsServer.emit("connection", socket, request);
+  });
 });
 
 app.use((_req, res) => {
