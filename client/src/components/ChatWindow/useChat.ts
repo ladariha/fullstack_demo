@@ -1,27 +1,23 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { MessageModel } from "@chatscope/chat-ui-kit-react/src/components/Message/Message";
+import { getWebSocketClient, WebSocketClient } from "./wsClient";
 
 type MessageWithId = MessageModel & { id: string };
 
 export const useChat = () => {
   const [messages, setMessages] = useState<MessageWithId[]>([]);
   const [isConnected, setIsConnected] = useState(false);
-  const wsSocket = useRef<WebSocket>();
+  const socketClient = useRef<WebSocketClient>();
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:4000");
-
-    socket.onopen = () => setIsConnected(true);
-    socket.onclose = () => setIsConnected(false);
-    socket.onmessage = (event) => {
-      const newMessage = JSON.parse(event.data);
-      setMessages((oldMessages) => [...oldMessages, { ...newMessage, type: "text" }]);
-    };
-    wsSocket.current = socket;
-    return () => {
-      if (socket.readyState === 1) {
-        socket.close();
+    socketClient.current = getWebSocketClient("ws://localhost:4000", setIsConnected, (newMessage) => {
+      const message = JSON.parse(newMessage);
+      if (message.type === "message") {
+        setMessages((oldMessages) => [...oldMessages, { ...message.payload, type: "text" }]);
       }
+    });
+    return () => {
+      socketClient.current?.close();
     };
   }, []);
 
@@ -35,7 +31,7 @@ export const useChat = () => {
       direction: "incoming",
     };
     setMessages((oldMessages) => [...oldMessages, { ...outgoingMessage, direction: "outgoing", sender: "me" }]);
-    wsSocket.current?.send(JSON.stringify(outgoingMessage));
+    socketClient.current?.send(JSON.stringify({ type: "message", payload: outgoingMessage }));
   }, []);
 
   return { messages, sendMessage, isConnected };
