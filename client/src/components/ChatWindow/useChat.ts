@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { MessageModel } from "@chatscope/chat-ui-kit-react/src/components/Message/Message";
 import { getWebSocketClient, WebSocketClient } from "./wsClient";
-
-type MessageWithId = MessageModel & { id: string };
+import { MessageWithId } from "../../types";
 
 export const useChat = () => {
   const [messages, setMessages] = useState<MessageWithId[]>([]);

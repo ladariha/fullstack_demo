@@ -1,4 +1,4 @@
-import express, { Express, Request, Response, NextFunction } from "express";
+import express, { Express, Request, Response, NextFunction, RequestHandler } from "express";
 import compression from "compression";
 import cors from "cors";
 import fileUpload from "express-fileupload";
@@ -8,6 +8,17 @@ import longPolling from "./longpolling/router";
 import passportRouter from "./login/googlePassport";
 import passport from "passport";
 import { createWsServer } from "./ws/index";
+import sseRouter from "./sse/router";
+
+const unless = (path: string, middleware: RequestHandler) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (path === req.path) {
+      return next();
+    } else {
+      return middleware(req, res, next);
+    }
+  };
+};
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
@@ -28,7 +39,7 @@ app.use(session({
 }));
 
 app.use(cors({ credentials: true, origin: true }));
-app.use(compression({ threshold: 1, level: 6 }));
+app.use(unless("/sse", compression({ threshold: 1, level: 6 })));
 app.use(express.json());
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 }, useTempFiles: true,
@@ -46,6 +57,7 @@ if (USE_PASSPORT) {
 } else {
   app.use("/auth", router);
 }
+app.use("/sse", sseRouter);
 app.use("/longpolling", longPolling);
 // curl -F 'file=@/home/vlriha/Downloads/image1.png' http://localhost:4000/upload -vvv
 app.post("/upload", async (req, res) => {

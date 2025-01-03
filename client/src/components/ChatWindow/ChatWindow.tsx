@@ -16,7 +16,7 @@ export const ChatWindow: React.FC<{ user: string }> = ({ user }) => {
 
   return (
     <div className="chat-window" style={{ backgroundColor: backgroundColor.current }}>
-      <div style={{ height: "500px", width: "25vw" }}>
+      <div>
         <h5>{user}</h5>
         <MainContainer>
           <ChatContainer>
@@ -35,7 +35,7 @@ export const ChatWindow: React.FC<{ user: string }> = ({ user }) => {
               onSend={(_innerHtml, _textContent, innerText) => {
                 sendMessage(innerText, user);
               }}
-              placeholder="Zpráva"
+              placeholder="Type message"
               attachButton={false}
             />
           </ChatContainer>
