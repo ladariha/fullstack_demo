@@ -1,0 +1,22 @@
+### Get
+GET https://api.restful-api.dev/objects?id=3&id=5&id=10
+
+
+### create new object
+POST https://api.restful-api.dev/objects
+content-type: application/json
+
+{
+   "name": "Apple MacBook Pro 16",
+   "data": {
+      "year": 2019,
+      "price": 1849.99,
+      "CPU model": "Intel Core i9",
+      "Hard disk size": "1 TB"
+   }
+}
+
+> {% client.global.set("new_id", response.body.id) %}
+
+### delete object
+DELETE https://api.restful-api.dev/objects/😀

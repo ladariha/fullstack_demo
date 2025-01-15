@@ -1,0 +1,7 @@
+{
+  "name": "fullstack_demo",
+  "scripts": {
+    "start:backend" : "npm run --prefix server dev",
+    "start:client" :  "npm run --prefix client start"
+  }
+}
