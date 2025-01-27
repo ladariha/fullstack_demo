@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link href="styles.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Demo</title>
+</head>
+<body>
+<div>
+    <form action='data.html' method='post'>
+
+        <label for="text-field" class="label">Jmeno jinak:</label>
+        <div
+                aria-describedby="popisek"
+                id="text-field"
+                class="editable-field"
+                contenteditable="true"
+                role="textbox"
+                aria-multiline="false"
+                aria-placeholder="Enter your name"
+        ></div>
+
+
+        <div id="popisek">
+            Toto je vlastni formularove pole
+        </div>
+
+        <div>
+            <div
+                    tabindex="0"
+                    aria-disabled="false"
+                    aria-label="Tlacitko k odeslani dat"
+                    role="button"
+                    style="border: 1px solid red" onclick="alert('click')">
+                Tlacitko
+            </div>
+        </div>
+        <button class='button' type='submit'>Odeslat</button>
+    </form>
+</div>
+</body>
+</html>

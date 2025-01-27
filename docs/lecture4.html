@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="styles.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <title>Demo</title>
+</head>
+<body>
+<div>
+
+
+
+        <form  id="myForm">
+            <button type="button">Pridej radek</button>
+            <label for="jmeno">Jmeno (alespon 1 znak):</label>
+            <input type="text" minlength="3" required value="robo" placeholder="Zadej hodnotu" id='jmeno' name="jmeno" />
+            <input type="text" readonly minlength="3" required value="robo" placeholder="Zadej hodnotu" id='jmeno2'
+                   name="jmeno2" />
+
+            <div>
+                <label for="mena">Vyber menu</label>
+                <select name="mena" multiple id="mena">
+                    <option selected>eur</option>
+                    <option value="czk">czk</option>
+                    <option value="usd">usd</option>
+                    <option value="gbp">gbp</option>
+                    <option value="cad">cad</option>
+                </select>
+            </div>
+
+            <textarea rows="5" cols="10" name="popis" id="textarea">Demo text</textarea>
+            <div>
+                <input type="checkbox" name="zapis" id="zapis" />
+                <label for="zapis">Dostavat zapis?</label>
+            </div>
+            <fieldset>
+                <legend>Opravdu?</legend>
+                <input type="radio" value="ano" name="volba" id="volba" />
+                <label for="volba">Ano</label>
+                <input type="radio" value="ne" name="volba" id="volba2" />
+                <label for="volba2">Ne</label>
+            </fieldset>
+            <input type="password" required value="heslo" placeholder="Zadej heslo" id='heslo' name="heslo" />
+            <div onclick="myFunction()">
+                <input type="number" min="1" max="10" name="cislo" id="cislo" step="2" />
+                <label for="cislo">Cislo</label>
+            </div>
+
+            <button class='button' type='submit'>Odeslat</button>
+            <input type='submit' value='Odeslat 2' />
+        </form>
+
+    <script>
+
+      const formElement = window.document.getElementById("myForm");
+
+      formElement?.addEventListener("submit", function (event) {
+        const formData = new FormData(window.document.getElementById("myForm"));
+        console.log(Array.from(formData.entries()));
+        event.preventDefault();
+      });
+
+
+    </script>
+</div>
+</body>
+</html>

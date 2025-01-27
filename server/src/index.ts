@@ -1,4 +1,5 @@
 import express, { Express, Request, Response, NextFunction, RequestHandler } from "express";
+import "dotenv/config";
 import compression from "compression";
 import cors from "cors";
 import fileUpload from "express-fileupload";
@@ -9,6 +10,8 @@ import passportRouter from "./login/googlePassport";
 import passport from "passport";
 import { createWsServer } from "./ws/index";
 import sseRouter from "./sse/router";
+
+console.log(".env test: " + process.env.heslo);
 
 const unless = (path: string, middleware: RequestHandler) => {
   return (req: Request, res: Response, next: NextFunction) => {

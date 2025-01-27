@@ -1,0 +1,31 @@
+td {
+    border: 1px solid black;
+}
+a:visited {
+  color: red;
+}
+h1 {
+    color: gray;
+}
+form > * {
+    display: block;
+    margin: 1em 0;
+}
+
+
+.editable-field {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    min-height: 20px;
+    outline: none;
+}
+.editable-field:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
