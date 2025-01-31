@@ -1,0 +1,20 @@
+services:
+  backend:
+    # image: ladariha/frontend
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+  client:
+    image: ladariha/frontend
+#    build:
+#      context: ./client
+#      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+
+# docker-compose up --build
+# docker-compose up --build --detach
+# docker-compose down

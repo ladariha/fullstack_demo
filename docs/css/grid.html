@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Demo</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap.css" />
     <style>
         .container {
             display: grid;
@@ -25,7 +26,19 @@
             /*grid-row-end: 3;*/
         }
 
-        @media screen and (max-width: 600px) {
+        @media screen and (max-width: 400px) {
+            .container {
+                background-color: aqua;
+                display: grid;
+                border: 1px solid red;
+                grid-template-columns: 1fr;
+                /*grid-template-rows: 2fr 1fr;*/
+                gap: 10px;
+
+            }
+        }
+
+        @media (min-width: 400px) and (max-width: 600px) {
             .container {
                 background-color: aqua;
                 display: grid;
@@ -40,7 +53,7 @@
     </style>
 </head>
 <body>
-
+<h4 class="title"></h4>
 <div class="container">
     <div>Div 1</div>
     <div class="box2">Div 2</div>

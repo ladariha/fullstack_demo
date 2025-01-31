@@ -5,77 +5,112 @@
     <title>Demo</title>
     <style>
         :root {
-            --vychozi-barva: rgba(173, 51, 234, 0.5);
+            --vychozi-barva: rgba(141, 112, 159, 0.5);
         }
 
-        a[data-label$="cervneny"] {
-            color: red;
+        div.demo {
+            background: url("../../dogs.jpg") red;
+            background-repeat: no-repeat;
+            border: 1px solid black;
+            padding: 10px;
         }
 
-        a[data-label$="modry"] {
-            color: blue;
-        }
+        div.demo:active {
 
-        .fialovy-div {
-            color: var(--vychozi-barva);
-        }
-
-        @media (max-width: 768px) {
-            div {
-                background-color: orange !important;
-            }
-        }
-
-        @property --primary-color {
-            syntax: "<color>";
-            inherits: true;
-            initial-value: #ff0000;
-        }
-
-        @property --main-width {
-            syntax: "<percentage>";
-            inherits: true;
-            initial-value: 30%;
-        }
-
-        :root {
-            --item-size: 50%;
-            --main-width: red;
-
-            p {
-                color: var(--primary-color);
-                background: var(--main-width);
-            }
         }
 
 
-        @scope (.card) {
-            h2 {
-                font-size: 1.5rem;
-                color: violet;
-            }
-
-            p {
-                color: gray;
-            }
+        /* (0, 1, 0) */
+        .fialova {
+            font-size: 10em;
+            background: var(--vychozi-barva);
         }
 
-        .card2 {
-            h2 {
-                font-size: 1.5rem;
-                color: pink;
-            }
-        }
+
+
+        /*a[data-label$="cervneny"] {*/
+        /*    color: red;*/
+        /*}*/
+
+        /*a[data-label$="modry"] {*/
+        /*    color: blue;*/
+        /*}*/
+
+        /*.fialovy-div {*/
+        /*    color: var(--vychozi-barva);*/
+        /*}*/
+
+        /*@media (max-width: 768px) {*/
+        /*    div {*/
+        /*        background-color: orange !important;*/
+        /*    }*/
+        /*}*/
+
+        /*@property --primary-color {*/
+        /*    syntax: "<color>";*/
+        /*    inherits: true;*/
+        /*    initial-value: #ff0000;*/
+        /*}*/
+
+        /*@property --main-width {*/
+        /*    syntax: "<percentage>";*/
+        /*    inherits: true;*/
+        /*    initial-value: 30%;*/
+        /*}*/
+
+        /*:root {*/
+        /*    --item-size: 50%;*/
+        /*    --main-width: red;*/
+
+        /*    p {*/
+        /*        color: var(--primary-color);*/
+        /*        background: var(--main-width);*/
+        /*    }*/
+        /*}*/
+
+
+        /*@scope (.card) {*/
+        /*    h2 {*/
+        /*        font-size: 1.5rem;*/
+        /*        color: violet;*/
+        /*    }*/
+
+        /*    p {*/
+        /*        color: gray;*/
+        /*    }*/
+        /*}*/
+
+        /*.card2 {*/
+        /*    h2 {*/
+        /*        font-size: 1.5rem;*/
+        /*        color: pink;*/
+        /*    }*/
+        /*}*/
 
     </style>
 </head>
 <body>
 
-<a href="#" data-label="cervneny">Cervneny</a>
+<div class="demo">
+    Ruzova
+    <div>Ahoj</div>
+    <article>
+        <div>clanek</div>
+    </article>
+    Test
+</div>
+Test
+
+
+
+<a href="http://ladariha.cz/pokus" data-label="cervneny">Cervneny</a>
 <a href="#" data-label="modry">modry</a>
 <div class="fialovy-div">FIALOVY DIV</div>
 
-<h1>CSS Specificity X-Y-Z</h1>
+<h1>
+    CSS Specificity X-Y-Z
+</h1>
+(1,2,3)
 ID-CLASS-ELEMENT_TYPE
 
 <p>PROPERTY</p>
@@ -85,5 +120,9 @@ ID-CLASS-ELEMENT_TYPE
 <article class="card2">
     <h2>Nadpis</h2>
 </article>
+
+<h1>NADPIS</h1>
+
+
 </body>
 </html>

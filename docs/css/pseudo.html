@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <style>
+        table tr:nth-child(odd) {
+            background-color: red;
+        }
+
+        table tr:nth-child(even) {
+            background-color: blue;
+            color: white;
+        }
+
+        .container {
+            font-size: 5px;
+        }
+
+        @media (max-width: 400px) {
+            table {
+                font-size: 10vw;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <table>
+        <caption>Popis</caption>
+        <tbody>
+        <tr>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>B</td>
+        </tr>
+        <tr>
+            <td>C</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
