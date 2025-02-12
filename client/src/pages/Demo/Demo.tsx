@@ -9,7 +9,7 @@ export const Demo: React.FC<Props> = ({ name }) => {
   return (
     <div>
       <Navigation />
-      Ahoj {name}
+      Ahoj <span className="name">{name}</span>
     </div>
   );
 };

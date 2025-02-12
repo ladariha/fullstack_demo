@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import { Demo, Props } from "./Demo";
 import { DemoPageObject } from "./Demo.pageObject";
+import { BrowserRouter } from "react-router";
 
 describe("Demo component", () => {
   const baseProps: Props = {
@@ -8,7 +9,7 @@ describe("Demo component", () => {
   };
 
   const renderComponent = (props = baseProps) => {
-    return new DemoPageObject(render(<Demo {...props} />));
+    return new DemoPageObject(render(<BrowserRouter><Demo {...props} /></BrowserRouter>));
   };
 
   it("should render", async () => {
