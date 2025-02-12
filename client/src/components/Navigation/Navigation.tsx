@@ -8,6 +8,7 @@ export const Navigation: React.FC = () => {
       <Link to="/">Home</Link>
       <Link to="/chat">Chat</Link>
       <Link to="/sse">SSE</Link>
+      <Link to="/lekce">Lekce</Link>
     </nav>
   );
 };
