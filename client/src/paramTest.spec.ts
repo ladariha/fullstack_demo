@@ -1,6 +1,6 @@
 describe("parametrized test", () => {
   it.each`
-a | b | expected
+a    | b    | expected
 ${1} | ${1} | ${2}
 ${1} | ${2} | ${3}
 ${2} | ${1} | ${3}

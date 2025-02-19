@@ -7,7 +7,9 @@ export const useFetchWeather = () => {
     isLoading,
     data,
     execute
-  } = useAsyncActionTracker<string, string>({ action: (cityName: string) => getWeather(cityName) });
+  } = useAsyncActionTracker<string, string>({
+    action: (cityName: string) => getWeather(cityName)
+  });
 
   const fetchWeather = (cityName: string) => execute(cityName);
 

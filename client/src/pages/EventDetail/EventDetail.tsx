@@ -2,7 +2,7 @@ import React from "react";
 import { PollingEvent } from "../../types";
 import "./styles.css";
 import { getDataById } from "../../eventData";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import { Weather } from "../../components/Weather/Weather";
 
 export const EventDetail: React.FC = () => {

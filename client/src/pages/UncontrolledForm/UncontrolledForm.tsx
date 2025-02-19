@@ -1,10 +1,11 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, useRef } from "react";
 import { waitMs } from "../../utils";
 import { Navigation } from "../../components/Navigation/Navigation";
 
 export const UncontrolledForm: React.FC = () => {
   const [disabled, setDisabled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const getFormInput = <T, >(event: FormEvent, fieldName: string): T => {
     const el = event.currentTarget.querySelector<HTMLInputElement>(`[name='${fieldName}']`);
@@ -14,6 +15,9 @@ export const UncontrolledForm: React.FC = () => {
   const handle = async (event: FormEvent) => {
     const input = getFormInput<HTMLInputElement>(event, "myName");
     console.log(input.value);
+
+    console.log("REF " + inputRef.current?.value);
+
     event.preventDefault();
 
     setDisabled(true);
@@ -28,7 +32,7 @@ export const UncontrolledForm: React.FC = () => {
       <Navigation />
       <h1>Uncontrolled</h1>
       <form onSubmit={handle}>
-        <input type="text" name="myName" placeholder="Name" required />
+        <input ref={inputRef} type="text" name="myName" defaultValue="AHOJ" placeholder="Name" required />
         <button type="submit" disabled={disabled}>Submit</button>
       </form>
       {submitted && <h3>Odeslano</h3>}

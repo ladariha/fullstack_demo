@@ -7,9 +7,12 @@ export const ControlledForm: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  const [validationError, setValidationError] = useState<string>();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value === "a") {
-      return;
+      setValidationError("Nepovoleny znak");
+      // return;
     }
     setInputValue(event.target.value);
   };
@@ -31,6 +34,7 @@ export const ControlledForm: React.FC = () => {
       <h1>Controlled</h1>
       <form onSubmit={handle}>
         <input type="text" value={inputValue} onChange={handleChange} placeholder="Name" required />
+        {validationError && <span>{validationError}</span>}
         <button type="submit" disabled={disabled}>Submit</button>
       </form>
       {submitted && <h3>Odeslano</h3>}

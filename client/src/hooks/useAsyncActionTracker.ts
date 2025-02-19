@@ -21,7 +21,7 @@ export const useAsyncActionTracker = <ReturnType, ParameterType = void>({
   initialState,
   initialLoadingState = false,
 }: AsyncActionTrackerParams<ParameterType, ReturnType>) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(initialLoadingState);
   const [error, setError] = useState<string>();
   const [data, setData] = useState<ReturnType | undefined>(initialState);
 
@@ -40,9 +40,9 @@ export const useAsyncActionTracker = <ReturnType, ParameterType = void>({
     []
   );
 
-  const setStateToError = useCallback(async (err: Error) => {
+  const setStateToError = useCallback((err: Error | string) => {
     setIsLoading(false);
-    setError(err.message);
+    setError(typeof err === "string" ? err : err.message);
     setData(undefined);
   }, []);
 
@@ -54,7 +54,7 @@ export const useAsyncActionTracker = <ReturnType, ParameterType = void>({
         setStateToSucceeded(preview);
         return preview;
       } catch (e) {
-        await setStateToError(e);
+        setStateToError(e);
       }
 
       return undefined;

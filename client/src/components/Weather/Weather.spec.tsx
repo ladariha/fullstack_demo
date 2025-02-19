@@ -16,7 +16,6 @@ describe("Demo component", () => {
   let getWeatherMock: jest.SpyInstance;
 
   beforeEach(() => {
-
   });
 
   afterEach(() => {
@@ -24,13 +23,53 @@ describe("Demo component", () => {
   });
 
   it("should render", async () => {
-    getWeatherMock = jest.spyOn(getWeatherUtils, "getWeather").mockImplementation(() => Promise.resolve("23"));
+    getWeatherMock = jest.spyOn(getWeatherUtils, "getWeather")
+      .mockImplementation(() => Promise.resolve("23"));
+
     const weather = renderComponent();
     await waitFor(() => {
       expect(getWeatherMock).toHaveBeenCalledTimes(1);
     });
     await waitFor(() => {
+      expect(getWeatherMock).toHaveBeenNthCalledWith(1, "Praha");
+    });
+    await waitFor(() => {
       expect(weather.getValue()).toEqual("Praha 23");
+    });
+  });
+
+  it("should render error", async () => {
+    getWeatherMock = jest.spyOn(getWeatherUtils, "getWeather")
+      .mockImplementation(() => Promise.reject("oops"));
+
+    const weather = renderComponent();
+    await waitFor(() => {
+      expect(getWeatherMock).toHaveBeenCalledTimes(1);
+    });
+    await waitFor(() => {
+      expect(getWeatherMock).toHaveBeenNthCalledWith(1, "Praha");
+    });
+
+    await waitFor(() => {
+      expect(weather.getValue()).toEqual("Praha");
+    });
+  });
+
+  it("should render loading", async () => {
+    const pendingPromise: Promise<string> = new Promise(() => {});
+    getWeatherMock = jest.spyOn(getWeatherUtils, "getWeather")
+      .mockImplementation(() => pendingPromise);
+
+    const weather = renderComponent();
+    await waitFor(() => {
+      expect(getWeatherMock).toHaveBeenCalledTimes(1);
+    });
+    await waitFor(() => {
+      expect(getWeatherMock).toHaveBeenNthCalledWith(1, "Praha");
+    });
+
+    await waitFor(() => {
+      expect(weather.getValue()).toEqual("Loading weather...");
     });
   });
 });
