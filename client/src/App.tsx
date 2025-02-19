@@ -9,6 +9,12 @@ import { ContextDemo } from "./pages/ContextDemo/ContextDemo";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import { ReduxDemo } from "./pages/Redux/ReduxDemo";
+import { UncontrolledForm } from "./pages/UncontrolledForm/UncontrolledForm";
+import { ControlledForm } from "./pages/ControlledForm/ControlledForm";
+import { FormikDemo } from "./pages/FormikDemo/FormikDemo";
+import { EventDetail } from "./pages/EventDetail/EventDetail";
+import { Events } from "./pages/Events/Events";
+import { data } from "./eventData";
 
 const App: React.FC = () => {
   return (
@@ -22,7 +28,12 @@ const App: React.FC = () => {
             <Route path="/lekce" element={<Demo name="lada" />} />
             <Route path="/reducer" element={<ReducerDemo />} />
             <Route path="/context" element={<ContextDemo />} />
+            <Route path="/controlled" element={<ControlledForm />} />
+            <Route path="/uncontrolled" element={<UncontrolledForm />} />
+            <Route path="/formik" element={<FormikDemo />} />
             <Route path="/redux/:parameter?" element={<ReduxDemo />} />
+            <Route path="/events/:id" element={<EventDetail />} />
+            <Route path="/events" element={<Events data={data} />} />
           </Routes>
         </BrowserRouter>
       </div>

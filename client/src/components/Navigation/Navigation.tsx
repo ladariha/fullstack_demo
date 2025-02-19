@@ -12,6 +12,10 @@ export const Navigation: React.FC = () => {
       <Link to="/reducer">useReducer</Link>
       <Link to="/context">context</Link>
       <Link to="/redux">redux</Link>
+      <Link to="/controlled">controlled form</Link>
+      <Link to="/uncontrolled">uncontrolled form</Link>
+      <Link to="/formik">Formik</Link>
+      <Link to="/events">Events</Link>
     </nav>
   );
 };
