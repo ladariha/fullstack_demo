@@ -15,10 +15,6 @@ export const EventDetail: React.FC = () => {
     }
   }, [id]);
 
-  React.useEffect(() => {
-    //
-  }, [item]);
-
   return (
     <div className="event">
       {!item && `Loading event ${id}...`}
