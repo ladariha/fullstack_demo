@@ -1,63 +1,59 @@
 import React from "react";
-import { Formik, Form, Field, FieldProps } from "formik";
-import { waitMs } from "../../utils";
+import { Formik, Form, Field } from "formik";
+import { useForm } from "./useForm";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const MyInput: React.FC<FieldProps> = ({ field, form, ...props }) => {
-  return (
-    <div style={{ border: "1px solid black" }}>
-      <input {...field} {...props} />
-    </div>
-  );
-};
+// // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// const MyInput: React.FC<FieldProps> = ({ field, form, ...props }) => {
+//   return (
+//     <div style={{ border: "1px solid black" }}>
+//       <input {...field} {...props} />
+//     </div>
+//   );
+// };
 
 export const FormikDemo: React.FC = () => {
+  const { submitForm } = useForm();
   return (
     <>
       <div>
         <h1>Sign Up</h1>
         <Formik
           initialValues={{
-            firstName: "Lada",
-            lastName: "",
-            email: "",
+            title: "New event",
+            location: "",
           }}
           validate={(values) => {
             const errors: Record<string, string> = {};
 
-            if (values.firstName && values.firstName.length < 5) {
+            if (values.title && values.title.length < 1) {
               errors.firstName = "Prilis kratke";
-            }
-
-            if (values.lastName && values.lastName.length < 3) {
-              errors.lastName = "Prilis kratke lastName";
             }
 
             return errors;
           }}
           onSubmit={async (values) => {
-            await waitMs(500);
-            alert(JSON.stringify(values, null, 2));
+            submitForm(values);
           }}
         >
 
           {({ isSubmitting, errors, isValid }) => (
             <Form>
               <div>
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="title">Název</label>
                 <Field
-                  name="firstName"
+                  name="title"
                   placeholder="Jane"
                 />
-                {errors.firstName && <div style={{ color: "red" }}>{errors.firstName}</div>}
+                {errors.title && <div style={{ color: "red" }}>{errors.title}</div>}
               </div>
               <div>
-                <label htmlFor="lastName">Last Name</label>
-                <Field component={MyInput} name="lastName" placeholder="Doe" />
-                {errors.lastName && <div style={{ color: "red" }}>{errors.lastName}</div>}
+                <label htmlFor="location">Místo</label>
+                <Field
+                  name="location"
+                  placeholder="Praha"
+                />
+                {errors.location && <div style={{ color: "red" }}>{errors.location}</div>}
               </div>
-              <label htmlFor="email">Email</label>
-              <Field name="email" placeholder="jane@email.com" type="email" />
 
               <button type="submit" disabled={isSubmitting || !isValid}>
                 Submit

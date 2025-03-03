@@ -14,7 +14,6 @@ import { ControlledForm } from "./pages/ControlledForm/ControlledForm";
 import { FormikDemo } from "./pages/FormikDemo/FormikDemo";
 import { EventDetail } from "./pages/EventDetail/EventDetail";
 import { Events } from "./pages/Events/Events";
-import { data } from "./eventData";
 
 const App: React.FC = () => {
   return (
@@ -33,7 +32,7 @@ const App: React.FC = () => {
             <Route path="/formik" element={<FormikDemo />} />
             <Route path="/redux/:parameter?" element={<ReduxDemo />} />
             <Route path="/events/:id" element={<EventDetail />} />
-            <Route path="/events" element={<Events data={data} />} />
+            <Route path="/events" element={<Events />} />
           </Routes>
         </BrowserRouter>
       </div>

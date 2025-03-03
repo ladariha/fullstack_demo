@@ -1,23 +1,21 @@
-import React from "react";
-import { PollingEvent } from "../../types";
+import React, { useEffect } from "react";
 import "./styles.css";
-import { getDataById } from "../../eventData";
 import { useParams } from "react-router";
 import { Weather } from "../../components/Weather/Weather";
+import { useFetchEvent } from "./useFetchEvent";
 
 export const EventDetail: React.FC = () => {
-  const [item, setItem] = React.useState<PollingEvent | undefined>();
   const { id } = useParams();
 
-  React.useEffect(() => {
-    if (id) {
-      setItem(getDataById(id));
-    }
-  }, [id]);
+  const { fetchEvents, isLoading, error, data: item } = useFetchEvent(id as string);
+  useEffect(() => {
+    fetchEvents();
+  }, []);
 
   return (
     <div className="event">
-      {!item && `Loading event ${id}...`}
+      {error ? error : ""}
+      {isLoading ? "Loading..." : ""}
       {item && (
         <>
           <h1>{item.title}</h1>
