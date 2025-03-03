@@ -1,58 +1,21 @@
-import express, { Express, Request, Response, NextFunction, RequestHandler } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 import "dotenv/config";
-import compression from "compression";
-import cors from "cors";
-import fileUpload from "express-fileupload";
-import session from "express-session";
 import router from "./login/router";
 import longPolling from "./longpolling/router";
 import passportRouter from "./login/googlePassport";
 import passport from "passport";
 import { createWsServer } from "./ws/index";
 import sseRouter from "./sse/router";
+import { configure as configureMiddleware } from "./middleware";
 
 console.log(".env test: " + process.env.heslo);
-
-const unless = (path: string, middleware: RequestHandler) => {
-  return (req: Request, res: Response, next: NextFunction) => {
-    if (path === req.path) {
-      return next();
-    } else {
-      return middleware(req, res, next);
-    }
-  };
-};
 
 const app: Express = express();
 const port = process.env.PORT || 4000;
 console.log("Starting... ");
 const USE_PASSPORT = true;
 
-app.set("trust proxy", 1);
-app.use(session({
-  resave: true,
-  name: "sid",
-  secret: "#$*&(^@&$*&^",
-  saveUninitialized: true,
-  cookie: {
-    sameSite: false,
-    secure: false,
-    maxAge: 10000000000, // ms
-  },
-}));
-
-app.use(cors({ credentials: true, origin: true }));
-app.use(unless("/sse", compression({ threshold: 1, level: 6 })));
-app.use(express.json());
-app.use(fileUpload({
-  limits: { fileSize: 50 * 1024 * 1024 }, useTempFiles: true,
-  tempFileDir: "/tmp/",
-}));
-
-app.use((_req, _res, next) => {
-  console.log("Time:" + Date.now());
-  next();
-});
+configureMiddleware(app);
 
 if (USE_PASSPORT) {
   app.use(passport.authenticate("session"));
@@ -72,6 +35,7 @@ app.post("/upload", async (req, res) => {
   res.json(JSON.stringify(uploadedFile));
 });
 
+// test error endpoint
 app.get("/err", async () => {
   const x = new Promise((_resolve, reject) => {
     setTimeout(() => {
@@ -100,6 +64,7 @@ server.on("upgrade", (request, socket, head) => {
   });
 });
 
+// Error handling confing
 app.use((_req, res) => {
   res.status(404).send("Not found");
 });
