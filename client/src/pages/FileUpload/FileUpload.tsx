@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useFileUpload } from "./useFileUpload";
+import { Navigation } from "../../components/Navigation/Navigation";
 
 export const FileUpload: React.FC = () => {
   const [file, setFile] = useState<File>();
 
-  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setFile(e.target.files[0]);
+  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files[0]);
     }
   };
 
@@ -21,6 +22,7 @@ export const FileUpload: React.FC = () => {
 
   return (
     <div>
+      <Navigation />
       <input type="file" onChange={onFileChange} />
       <button onClick={handleUpload}>Upload</button>
 
@@ -34,6 +36,7 @@ export const FileUpload: React.FC = () => {
           <h1>Soubor</h1>
           <ul>
             <li>Jmeno: {file.name}</li>
+            <li>Naposledy upraveno: {new Date(file.lastModified).toLocaleString()}</li>
             <li>Typ: {file.type}</li>
             <li>Velikost: {file.size} b</li>
           </ul>
