@@ -11,7 +11,7 @@ export type DateRecord = {
   records: UserRecord[];
 };
 export type PollingEvent = {
-  location?: string;
+  location?: string | null;
   title: string;
   id: string;
   dates: DateRecord[];

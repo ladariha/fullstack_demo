@@ -1,6 +1,6 @@
 import { useAsyncActionTracker } from "../../hooks/useAsyncActionTracker";
-import { getEvents } from "./utils";
 import { PollingEvent } from "../../types";
+import { loadEventsGenerated, SimplePollingEvent } from "../../apiClient";
 
 export const useFetchEvents = () => {
   const {
@@ -8,8 +8,9 @@ export const useFetchEvents = () => {
     isLoading,
     data,
     execute: fetchEvents,
-  } = useAsyncActionTracker<PollingEvent[]>({
-    action: () => getEvents()
+  } = useAsyncActionTracker<PollingEvent[] | SimplePollingEvent[]>({
+    // action: () => getEvents()
+    action: () => loadEventsGenerated()
   });
 
   return { error, isLoading, data, fetchEvents };

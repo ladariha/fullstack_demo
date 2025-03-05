@@ -10,10 +10,13 @@ import { configure as configureMiddleware } from "./middleware";
 import greedyRouter from "./demo/router";
 import paramsRouter from "./demo/params";
 import eventsRouter from "./demo/events";
+import negotiationRouter from "./demo/contentNegotiation";
+import fileUploadRouter from "./demo/fileUpload";
 
 console.log(".env test: " + process.env.heslo);
 
 const app: Express = express();
+
 const port = process.env.PORT || 4000;
 console.log("Starting... ");
 const USE_PASSPORT = true;
@@ -23,6 +26,8 @@ configureMiddleware(app);
 app.use("/greedy", greedyRouter);
 app.use("/params", paramsRouter);
 app.use("/eventsapi", eventsRouter);
+app.use("/content", negotiationRouter);
+app.use("/fileupload", fileUploadRouter);
 
 if (USE_PASSPORT) {
   app.use(passport.authenticate("session"));
@@ -32,16 +37,6 @@ if (USE_PASSPORT) {
 }
 app.use("/sse", sseRouter);
 app.use("/longpolling", longPolling);
-
-// curl -F 'file=@/home/vlriha/Downloads/image1.png' http://localhost:4000/upload -vvv
-app.post("/upload", async (req, res) => {
-  if (!req.files?.file) {
-    res.status(422).send("No files were uploaded");
-    return;
-  }
-  const uploadedFile = req.files.file;
-  res.json(JSON.stringify(uploadedFile));
-});
 
 // test error endpoint
 app.get("/err", async () => {

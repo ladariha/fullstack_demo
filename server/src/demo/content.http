@@ -1,0 +1,19 @@
+### GET request to example server
+# curl -X GET "http://localhost:4000/content/data" -v
+GET http://localhost:4000/content/data
+
+###
+GET http://localhost:4000/content/data
+Accept: application/json
+
+### test
+GET http://localhost:4000/content/data
+Accept: text/xml;q=0.8, application/json;q=0.9
+
+### Not matching
+GET http://localhost:4000/content/data
+Accept: application/xml
+
+
+
+###

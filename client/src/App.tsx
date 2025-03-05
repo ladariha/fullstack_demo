@@ -14,6 +14,7 @@ import { ControlledForm } from "./pages/ControlledForm/ControlledForm";
 import { FormikDemo } from "./pages/FormikDemo/FormikDemo";
 import { EventDetail } from "./pages/EventDetail/EventDetail";
 import { Events } from "./pages/Events/Events";
+import { FileUpload } from "./pages/FileUpload/FileUpload";
 
 const App: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ const App: React.FC = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/file" element={<FileUpload />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/sse" element={<SSE />} />
             <Route path="/lekce" element={<Demo name="lada" />} />

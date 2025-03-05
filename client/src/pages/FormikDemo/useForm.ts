@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const useForm = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const submitForm = async (values: Record<string, string | number>) => {
     const response = await fetch("http://localhost:4000/eventsapi/events", {
@@ -10,7 +10,7 @@ export const useForm = () => {
       headers: { "Content-Type": "application/json" }
     });
     if (response.ok) {
-      nav("/events");
+      navigate("/events");
     }
   };
 
