@@ -21,7 +21,9 @@
     "test:ci": "react-scripts test --watchAll=false",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build" : "docker build -t ladariha/fullstack-client:${new_version} .",
+    "docker:publish" : ""
   },
   "eslintConfig": {
     "extends": [
