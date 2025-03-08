@@ -20,7 +20,6 @@ const app: Express = express();
 const port = process.env.PORT || 4000;
 console.log("Starting... ");
 const USE_PASSPORT = true;
-
 configureMiddleware(app);
 
 app.use("/greedy", greedyRouter);

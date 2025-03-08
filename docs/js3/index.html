@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+</head>
+<body>
+<div id="main">
+    <h1 id="title">Demo</h1>
+
+    <form id="myForm">
+        <label for="jmeno">Jmeno (alespon 1 znak):</label>
+        <div>
+            <input type="text" value="" placeholder="Zadej hodnotu" id='jmeno' name="jmeno" />
+        </div>
+
+        <label for="prijmeni">Prijmeni (alespon 1 znak):</label>
+        <div>
+            <input type="text" value="riha" placeholder="Zadej hodnotu" id='prijmeni'
+                   name="prijmeni" />
+        </div>
+
+        <button class='button' id="submit" type='button'>Odeslat</button>
+    </form>
+    <textarea id="output" rows="10" cols="50"></textarea>
+
+
+    <script>
+
+
+
+      const print = (message) => {
+        document.getElementById("output").value += `${typeof message === "string" ? message : JSON.stringify(message, null, 2)}
+`;
+      };
+      const showError = (inputId) => {
+        const errorMessage = document.createElement("span");
+        errorMessage.innerText = `Tohle je spatne`;
+        document.getElementById(inputId).parentElement.appendChild(errorMessage);
+      };
+
+
+      window.document.getElementById("submit").addEventListener("click", function (event) {
+        const formData = new FormData(window.document.getElementById("myForm"));
+        const name = formData.get("jmeno");
+        const lastName = formData.get("prijmeni");
+
+        if (!name) {
+          showError("jmeno");
+        }
+
+        if (!lastName) {
+          showError("prijmeni");
+        }
+        event.preventDefault();
+      });
+
+      document.querySelector("#main")
+        .addEventListener("click", (evt) => {
+// current target = element with listener
+// target = who actually triggered it
+//           print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : evt.target.tagName}`);
+          print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : evt.target.tagName}`);
+        });
+
+
+      document.querySelector("#title")
+        .addEventListener("click", (evt) => {
+          print("#title klik");
+          evt.stopPropagation();
+        });
+
+
+    </script>
+
+</div>
+</body>
+</html>
