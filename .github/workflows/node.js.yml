@@ -16,10 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Install Dependencies
-        run: |
-          npm install --prefix server
-          npm install --prefix client
+      - name: Install server dependencies
+        run: npm install --prefix server
+        if: success()
+      - name: Install client dependencies
+        run: npm install --prefix client
+        if: success()
       - name: Eslint
         run: |
           npm run lint --prefix server
