@@ -31,3 +31,24 @@ jobs:
           npm run test --prefix client
         env:
           CI: true
+  publish:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Dependencies
+        run: |
+          npm install --prefix server
+          npm install --prefix client
+      - name: Build and publish client
+        run: |
+          npm run docker:build --prefix client
+          npm run docker:publish --prefix client
+      - name: Build and publish server
+        run: |
+          npm run docker:build --prefix server
+          npm run docker:publish --prefix server
