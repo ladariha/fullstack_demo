@@ -17,10 +17,14 @@ jobs:
         with:
           node-version: 20
       - name: Install server dependencies
-        run: npm install --prefix server
+        run: |
+          npm install --prefix server
+          echo $?
         if: success()
       - name: Install client dependencies
-        run: npm install --prefix client
+        run: |
+          npm install --prefix client
+          echo $?
         if: success()
       - name: Eslint
         run: |
