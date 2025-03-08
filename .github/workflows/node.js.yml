@@ -39,7 +39,7 @@ jobs:
 #      if: ${{ github.ref == 'refs/heads/main' }}
   publish-client:
     env:
-      IMAGE_NAME: ladarihafullstackclient
+      IMAGE_NAME: ladariha/fullstackclient
     needs: build_and_test
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
