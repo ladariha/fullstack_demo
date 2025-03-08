@@ -15,8 +15,6 @@ const asyncCounterCall = (): Promise<number> => {
 };
 
 export const Demo: FC<Props> = ({ name }) => {
-  console.log("Render????");
-
   const [counter, setCounter] = useState<number>(0);
   const [upperCasedResponse, setUpperCasedResponse] = useState<string>();
   const [asyncCounter, setAsyncCounter] = useState<number>(0);
