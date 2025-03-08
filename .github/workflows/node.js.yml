@@ -9,7 +9,7 @@ on:
     - main
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,5 +24,6 @@ jobs:
         run: |
           npm run lint --prefix server
           npm run lint --prefix client
+        if: success()
         env:
           CI: true
