@@ -9,20 +9,25 @@ on:
     - main
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
       - name: Install Dependencies
         run: |
           npm install --prefix server
           npm install --prefix client
       - name: Eslint
         run: |
-          npm run lint --prefix server
           npm run lint --prefix client
+          npm run lint --prefix server
+        env:
+          CI: true
+      - name: Test
+        run: |
+          npm run test --prefix client
         env:
           CI: true
