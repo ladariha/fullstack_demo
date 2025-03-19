@@ -132,3 +132,4 @@ server/pm2*err
 .pnp.*
 .idea
 dist
+*.db
