@@ -8,6 +8,7 @@ import { createWsServer } from "./ws/index";
 import sseRouter from "./sse/router";
 import { configure as configureMiddleware } from "./middleware";
 import greedyRouter from "./demo/router";
+import dbRouter from "./db/injection";
 import paramsRouter from "./demo/params";
 import eventsRouter from "./demo/events";
 import negotiationRouter from "./demo/contentNegotiation";
@@ -27,6 +28,7 @@ app.use("/params", paramsRouter);
 app.use("/eventsapi", eventsRouter);
 app.use("/content", negotiationRouter);
 app.use("/fileupload", fileUploadRouter);
+app.use("/db", dbRouter);
 
 if (USE_PASSPORT) {
   app.use(passport.authenticate("session"));

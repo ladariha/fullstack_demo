@@ -6,6 +6,7 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="navigation">
       <Link to="/">Home</Link>
+      <Link to="/db">Database</Link>
       <Link to="/file">File upload</Link>
       <Link to="/chat">Chat</Link>
       <Link to="/sse">SSE</Link>

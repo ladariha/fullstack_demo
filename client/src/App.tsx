@@ -15,6 +15,7 @@ import { FormikDemo } from "./pages/FormikDemo/FormikDemo";
 import { EventDetail } from "./pages/EventDetail/EventDetail";
 import { Events } from "./pages/Events/Events";
 import { FileUpload } from "./pages/FileUpload/FileUpload";
+import { Database } from "./pages/Database/Database";
 
 const App: React.FC = () => {
   return (
@@ -35,6 +36,7 @@ const App: React.FC = () => {
             <Route path="/redux/:parameter?" element={<ReduxDemo />} />
             <Route path="/events/:id" element={<EventDetail />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/db" element={<Database />} />
           </Routes>
         </BrowserRouter>
       </div>

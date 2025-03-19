@@ -1,0 +1,22 @@
+.db {
+    display: flex;
+    width: 600px;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.db-form {
+    margin: 20px;
+    background: rgba(176, 189, 198, 0.69);
+
+    & * {
+        margin-top: 10px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    & form {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
