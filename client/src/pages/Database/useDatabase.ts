@@ -21,7 +21,7 @@ export const useFetchDatabase = () => {
     data: sendResponse,
   } = useAsyncActionTracker<void, string>({
     action: async (payload: string) => {
-      const response = await fetch("http://localhost:4000/db/inject", {
+      const response = await fetch("http://localhost:4000/db/inject-safe", {
         method: "POST",
         body: JSON.stringify({ text: payload }),
         headers: { "Content-Type": "application/json" },
