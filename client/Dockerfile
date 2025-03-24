@@ -18,6 +18,27 @@ CMD [ "npm", "run", "start" ]
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # docker build .
 # docker images
 # ladariha should be yourdockerhubusername
@@ -31,3 +52,4 @@ CMD [ "npm", "run", "start" ]
 # docker tag yourdockerhubusername/frontend yourdockerhubusername/frontend:v1
 # docker login
 # docker push yourdockerhubusername/frontend:v1
+# docker exec -it angry_mcclintock /bin/bash
