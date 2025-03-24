@@ -8,8 +8,8 @@ import { createWsServer } from "./ws/index";
 import sseRouter from "./sse/router";
 import { configure as configureMiddleware } from "./middleware";
 import greedyRouter from "./demo/router";
-import dbRouter from "./db/injection";
-import eventsDbRouter from "./demo/eventsWithDatabase";
+// import dbRouter from "./db/injection";
+// import eventsDbRouter from "./demo/eventsWithDatabase";
 
 import paramsRouter from "./demo/params";
 import eventsRouter from "./demo/events";
@@ -23,20 +23,20 @@ const app: Express = express();
 const port = process.env.PORT || 4000;
 console.log("Starting... ");
 const USE_PASSPORT = true;
-const USE_DATABASE = true;
+// const USE_DATABASE = false;
 
 configureMiddleware(app);
 
 app.use("/greedy", greedyRouter);
 app.use("/params", paramsRouter);
-if (USE_DATABASE) {
-  app.use("/eventsapi", eventsDbRouter);
-} else {
-  app.use("/eventsapi", eventsRouter);
-}
+// if (USE_DATABASE) {
+//   app.use("/eventsapi", eventsDbRouter);
+// } else {
+app.use("/eventsapi", eventsRouter);
+// }
 app.use("/content", negotiationRouter);
 app.use("/fileupload", fileUploadRouter);
-app.use("/db", dbRouter);
+// app.use("/db", dbRouter);
 
 if (USE_PASSPORT) {
   app.use(passport.authenticate("session"));
