@@ -133,3 +133,5 @@ server/pm2*err
 .idea
 dist
 *.db
+.DS_Store
+client/build
