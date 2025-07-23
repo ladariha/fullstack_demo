@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Demo</title>
+    <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0" name="viewport">
+    <style>
+
+        /* CSS pixels, not device pixels! */
+        @media (max-width: 400px) {
+            .container {
+                color: green;
+            }
+        }
+
+        @media print {
+            .container {
+                color: red;
+            }
+        }
+
+        @media screen and (min-width: 401px) {
+            .container {
+                color: orange;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    Ahoj
+</div>
+
+</body>
+</html>
