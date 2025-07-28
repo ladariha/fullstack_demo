@@ -17,11 +17,11 @@ const test = () => {
 // console.log(c)
 // b = "nova hodnota"
 
-// const o = {
-//   data: () => {
-//     console.log("data");
-//   },
-// };
-// o["data"]?.();
-// o["data2"]?.();
+const o = {
+  data: () => {
+    console.log("data");
+  },
+};
+o["data"]?.();
+o["data2"]?.();
 test();
