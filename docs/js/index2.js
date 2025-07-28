@@ -1,4 +1,5 @@
 console.clear();
+
 const obj = {
   a: 1,
   self: () => obj,
@@ -19,6 +20,8 @@ const obj = {
 
 console.log("test2:");
 console.log(obj.test2());
+
+
 console.log("test:");
 console.log(obj.test());
 
@@ -30,5 +33,7 @@ console.log(obj.test2.apply({}));
 console.log("self");
 console.log(obj.self());
 
+
+console.log("----- TIMEOUT ------")
 setTimeout(obj.testConsole, 3000);
 setTimeout(obj.testConsole2, 3000);
