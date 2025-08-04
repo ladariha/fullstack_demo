@@ -26,7 +26,7 @@ deleteCopyFile()
   .then(getItems)
   .then(writeItems)
   .then(() => {
-    console.log("DONE");
+    console.log("All done");
   })
   .catch((err) => {
     console.error("oops");

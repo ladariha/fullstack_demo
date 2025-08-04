@@ -3,35 +3,46 @@
 <head>
     <meta charset="utf-8" />
     <title>Demo</title>
+    <style>
+        #main {
+            display: flex;
+            background: #8ca7bf;
+            padding: 1em;
+            gap: 1em
+        }
+
+    </style>
 </head>
 <body>
 <div id="main">
-    <h1 id="title">Demo</h1>
+    <div>
+        <h1 id="title">Demo</h1>
 
-    <form id="myForm">
-        <label for="jmeno">Jmeno (alespon 1 znak):</label>
-        <div>
-            <input type="text" value="" placeholder="Zadej hodnotu" id='jmeno' name="jmeno" />
-        </div>
+        <form id="myForm">
+            <label for="jmeno">Jmeno (alespon 1 znak):</label>
+            <div>
+                <input type="text" value="" placeholder="Zadej hodnotu" id='jmeno' name="jmeno" />
+            </div>
 
-        <label for="prijmeni">Prijmeni (alespon 1 znak):</label>
-        <div>
-            <input type="text" value="riha" placeholder="Zadej hodnotu" id='prijmeni'
-                   name="prijmeni" />
-        </div>
+            <label for="prijmeni">Prijmeni (alespon 1 znak):</label>
+            <div>
+                <input type="text" value="riha" placeholder="Zadej hodnotu" id='prijmeni'
+                       name="prijmeni" />
+            </div>
 
-        <button class='button' id="submit" type='button'>Odeslat</button>
-    </form>
-    <textarea id="output" rows="10" cols="50"></textarea>
+            <button class='button' id="submit" type='button'>Odeslat</button>
+        </form>
+    </div>
 
-
+    <div>
+        <textarea id="output" rows="10" cols="50"></textarea>
+        <button id="clear">Smazat</button>
+    </div>
     <script>
 
 
-
       const print = (message) => {
-        document.getElementById("output").value += `${typeof message === "string" ? message : JSON.stringify(message, null, 2)}
-`;
+        document.getElementById("output").value += `${typeof message === "string" ? message : JSON.stringify(message, null, 2)}\n`;
       };
       const showError = (inputId) => {
         const errorMessage = document.createElement("span");
@@ -60,7 +71,7 @@
 // current target = element with listener
 // target = who actually triggered it
 //           print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : evt.target.tagName}`);
-          print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : evt.target.tagName}`);
+          print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : `<${evt.target.tagName}>`}`);
         });
 
 
@@ -70,6 +81,10 @@
           evt.stopPropagation();
         });
 
+      document.querySelector("#clear").addEventListener("click", (evt) => {
+        document.getElementById("output").value = "";
+        evt.stopPropagation();
+      })
 
     </script>
 
