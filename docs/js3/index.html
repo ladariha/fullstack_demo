@@ -66,12 +66,15 @@
         event.preventDefault();
       });
 
+      const PHASES = ["NONE", "CAPTURE", "TARGET", "BUBBLE"];
+
       document.querySelector("#main")
         .addEventListener("click", (evt) => {
+          const phase = PHASES[evt.eventPhase];
 // current target = element with listener
 // target = who actually triggered it
 //           print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : evt.target.tagName}`);
-          print(`#main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : `<${evt.target.tagName}>`}`);
+          print(`[${phase}] #main klik, target: ${evt.target.getAttribute("id") ? `#${evt.target.getAttribute("id")}` : `<${evt.target.tagName}>`}`);
         });
 
 
