@@ -28,7 +28,7 @@ const demo = () => {
 
 const run = async () => {
   try {
-    console.log("HODNOTA "+ hodnota);
+    // console.log("HODNOTA "+ hodnota);
     await deleteCopyFile();
     const items = await getItems();
     await writeItems(items);

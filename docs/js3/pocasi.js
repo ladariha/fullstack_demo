@@ -8,11 +8,7 @@ const getCityCoords = async (cityName) => {
   try {
 
     const response = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&language=en&format=json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ key: "value" }),
+      method: "GET",
     });
 
 
@@ -25,6 +21,7 @@ const getCityCoords = async (cityName) => {
     return { latitude, longitude };
   } catch (e) {
     window.alert(e.message);
+    return undefined;
   }
 };
 const getForecast = async ({ latitude, longitude }) => {
@@ -38,7 +35,7 @@ const getForecast = async ({ latitude, longitude }) => {
     const max = jsonResponse.daily.temperature_2m_max[0];
     const min = jsonResponse.daily.temperature_2m_min[0];
     const average = (max + min) / 2;
-    print({ average: average + jsonResponse.daily_units.temperature_2m_max });
+    return average + jsonResponse.daily_units.temperature_2m_max;
   } catch (e) {
     window.alert(e.message);
   }
@@ -46,10 +43,9 @@ const getForecast = async ({ latitude, longitude }) => {
 
 
 window.document.getElementById("pocasi").addEventListener("click", async () => {
-  const mesto = "Praha";
+  const cities = document.querySelector("textarea").value.split(/[:;]/);
 
-  const cityCoords = await getCityCoords(mesto);
-  print(cityCoords);
-
-  const forecast = await getForecast(cityCoords);
+  const cityCoords = await getCityCoords(cities[0]);
+  print(`\n  Coordinates: ${JSON.stringify(cityCoords, null, 4)}\n`);
+  print(`  ${await getForecast(cityCoords)}`);
 });
